@@ -32,25 +32,22 @@ $(function() {
 
 });
 
-
-
 /*
+var temp;
 
 $('#dropdown li').each(function(index){
   var city = $(this).text();
-  var cityID = $(this).attr("id") ;
-  var temp;
+  
   var url = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D"' + $(this).attr("id") + '")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys' ;
   $.getJSON( url, {}, function(data ){
     city = city + " " +CF(data.query.results.channel.item.condition.temp);
     temp = CF(data.query.results.channel.item.condition.temp);
-    console.log(city+" "+ cityID +" " +index );
+    console.log(city+" "+index );
   });
 
-  console.log(city);
 });
-*/
 
+*/
 
 var skycons_state = function(date,status){
 
@@ -58,8 +55,8 @@ var skycons_state = function(date,status){
       skycons.set(date, Skycons.CLEAR_DAY);
     }
 
-    else if(status.search("Clear") >= 0){
-      skycons.set(date, Skycons.CLEAR_NIGHT);
+    else if(status.search("Partly Cloudy") >= 0){
+      skycons.set(date, Skycons.PARTLY_CLOUDY_DAY);
     }
 
     else if(status.search("Cloudy") >= 0){
@@ -83,6 +80,12 @@ var skycons_state = function(date,status){
     else if(status.search("Foggy") >= 0){
       skycons.set(date, Skycons.FOG);
     }
+
+    else if(status.search("Thunderstorms") >= 0){
+      skycons.set(date, Skycons.RAIN);
+    }
+    
+
 }
 
 
@@ -100,7 +103,7 @@ $.getJSON(
           console.log('data',data);
           $('.temperature').text(CF(data.query.results.channel.item.condition.temp));
           $('.date').text(data.query.results.channel.item.forecast[0].date);
-          $('.cond').text(':' + data.query.results.channel.item.condition.text); //condition
+          $('.cond').text('' + data.query.results.channel.item.condition.text); //condition
           
     
           $("thead > tr >th:nth-child(1)").text(data.query.results.channel.item.forecast[1].date);
@@ -113,7 +116,9 @@ $.getJSON(
           skycons_state("today",data.query.results.channel.item.condition.text);
           skycons_state("day1",data.query.results.channel.item.forecast[1].text);
           skycons_state("day2",data.query.results.channel.item.forecast[2].text);
-          skycons_state("day3",data.query.results.channel.item.forecast[3].text);    
+          skycons_state("day3",data.query.results.channel.item.forecast[3].text);  
+
+
         }
     );
 };
