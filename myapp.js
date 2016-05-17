@@ -118,11 +118,11 @@ $.getJSON(
           
     
           $("thead > tr >th:nth-child(1)").text(data.query.results.channel.item.forecast[1].date);
-          $(".temp-fore > td:nth-child(1)").text(CF(data.query.results.channel.item.forecast[1].low)+ '~' + CF(data.query.results.channel.item.forecast[1].high) + "℃"); 
+          $(".temp:nth-child(1)").text(CF(data.query.results.channel.item.forecast[1].low)+ '~' + CF(data.query.results.channel.item.forecast[1].high) + "℃"); 
           $("thead > tr >th:nth-child(2)").text(data.query.results.channel.item.forecast[2].date);
-          $(".temp-fore > td:nth-child(2)").text(CF(data.query.results.channel.item.forecast[2].low) + '~' + CF(data.query.results.channel.item.forecast[2].high) + "℃"); 
+          $(".temp:nth-child(2)").text(CF(data.query.results.channel.item.forecast[2].low) + '~' + CF(data.query.results.channel.item.forecast[2].high) + "℃"); 
           $("thead > tr >th:nth-child(3)").text(data.query.results.channel.item.forecast[3].date);
-          $(".temp-fore > td:nth-child(3)").text(CF(data.query.results.channel.item.forecast[3].low) + '~' + CF(data.query.results.channel.item.forecast[3].high) + "℃"); 
+          $(".temp:nth-child(3)").text(CF(data.query.results.channel.item.forecast[3].low) + '~' + CF(data.query.results.channel.item.forecast[3].high) + "℃"); 
 
           skycons_state("today",data.query.results.channel.item.condition.text);
           skycons_state("day1",data.query.results.channel.item.forecast[1].text);
