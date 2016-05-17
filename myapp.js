@@ -32,6 +32,17 @@ $(function() {
 
 });
 
+$( '#dropdown li' ).each(function( index,element) {
+   var url = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D"' + $(this).attr("id") + '")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys' ;
+  city=$(element).text();
+  $.getJSON(url,function(data){
+    var temp=data.query.results.channel.item.condition.temp;
+    temp= CF(temp);
+    $(element).text($(element).text()+"  "+temp +  "℃");
+  });
+});
+
+
 /*
 var temp;
 
